@@ -1,0 +1,5 @@
+C:\Users\intern.pmquang1\C#\ConsoleCasino\ConsoleCasino\obj\Debug\net8.0\ConsoleCasino.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\intern.pmquang1\C#\ConsoleCasino\ConsoleCasino\obj\Debug\net8.0\ConsoleCasino.AssemblyInfoInputs.cache
+C:\Users\intern.pmquang1\C#\ConsoleCasino\ConsoleCasino\obj\Debug\net8.0\ConsoleCasino.AssemblyInfo.cs
+C:\Users\intern.pmquang1\C#\ConsoleCasino\ConsoleCasino\obj\Debug\net8.0\ConsoleCasino.csproj.CoreCompileInputs.cache
+C:\Users\intern.pmquang1\C#\ConsoleCasino\ConsoleCasino\obj\Debug\net8.0\ConsoleCasino.sourcelink.json

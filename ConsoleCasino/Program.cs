@@ -28,21 +28,49 @@ namespace ConsoleCasino
                 }
                 
             }
-            void diceGame()
+            double diceGame(double bet)
+            {
+                double money;
+                Random rnd = new Random();
+                int userRoll = rnd.Next(1,7); //random number between 1 and 6
+                int dealerRoll = rnd.Next(1,7);
+                if(userRoll > dealerRoll)
+                {
+                    Console.WriteLine("HURRAY you WON!");
+                    money = bet * 2;
+                    Console.WriteLine($"You won {money}!!");
+                }else if(userRoll < dealerRoll)
+                {
+                    Console.WriteLine("Too bad you LOST!!!!!!");
+                    money = 0;
+                    Console.WriteLine("The house will take all your bet :(");
+                }
+                else
+                {
+                    Console.WriteLine("Its a TIE. You get your money back");
+                    money = bet;
+                }
+                return money;
+            }
+            void diceGameMenu()
             {
                 Console.WriteLine("Welcome to the DICE GAME!");
                 Console.WriteLine("Press the \"k\" key when you are ready to start");
-                Console.WriteLine("Press the \"n\" key when you are not ready");
+                Console.WriteLine("Press the \"n\" key to exit");
                 string input = Console.ReadLine();
                 while(true)
                 {
                     if (input.ToLower() == "k")
                     {
+                        Console.WriteLine("Enter the your bet amount: ");
+                        double bet = double.Parse(Console.ReadLine());
+
+                        diceGame(bet);
                         break;
                     }
                     else if (input.ToLower() == "n")
                     {
-
+                        break;
                     }
                     else
                     {

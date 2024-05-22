@@ -18,21 +18,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "userAccount.cs",
-              "DocumentMoniker": "C:\\Users\\intern.pmquang1\\C#\\ConsoleCasino\\ConsoleCasino\\userAccount.cs",
-              "RelativeDocumentMoniker": "ConsoleCasino\\userAccount.cs",
-              "ToolTip": "C:\\Users\\intern.pmquang1\\C#\\ConsoleCasino\\ConsoleCasino\\userAccount.cs",
-              "RelativeToolTip": "ConsoleCasino\\userAccount.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAACgAAAAdAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-21T10:00:11.915Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -41,9 +28,23 @@
               "RelativeDocumentMoniker": "ConsoleCasino\\Program.cs",
               "ToolTip": "C:\\Users\\intern.pmquang1\\C#\\ConsoleCasino\\ConsoleCasino\\Program.cs",
               "RelativeToolTip": "ConsoleCasino\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAiAAAA",
+              "ViewState": "AQIAAC0BAAAAAAAAAAAAwEEBAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-21T09:42:40.91Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "userAccount.cs",
+              "DocumentMoniker": "C:\\Users\\intern.pmquang1\\C#\\ConsoleCasino\\ConsoleCasino\\userAccount.cs",
+              "RelativeDocumentMoniker": "ConsoleCasino\\userAccount.cs",
+              "ToolTip": "C:\\Users\\intern.pmquang1\\C#\\ConsoleCasino\\ConsoleCasino\\userAccount.cs",
+              "RelativeToolTip": "ConsoleCasino\\userAccount.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAwAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-21T10:00:11.915Z",
               "EditorCaption": ""
             }
           ]

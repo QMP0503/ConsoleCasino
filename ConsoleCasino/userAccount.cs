@@ -9,8 +9,8 @@ namespace ConsoleCasino
 {
     public class userAccount
     {
-        string username;
-        int pin;
+        public string username;
+        public int pin;
         double balance;
         int wins;
         int loss;

@@ -12,26 +12,33 @@ namespace ConsoleCasino
         string username;
         int pin;
         double balance;
+        int wins;
+        int loss;
         //List<string> record = new List<string>;
 
-        public userAccount(string username, int pin, double balance/*, List<string> record*/)
+        public userAccount(string username, int pin, double balance, int wins, int loss)
         {
             this.username = username;
             this.pin = pin;
             this.balance = balance;
-            //this.record = record;
+            this.wins = wins;
+            this.loss = loss;
         }
-        public int getPin() { return pin; }
-        public double getBalance() { return balance; }
-        public string getUsername() { return username; }
-        public void setUsername(string username) { this.username = username; }
-        public void setPin(int pin) {  this.pin = pin; }
-        public void setNewBalance(double deposit) {  balance += deposit; }
-        /*
-        public void addRecord(string record)
+        public int GetPin() { return pin; }
+        public double GetBalance() { return balance; }
+        public string GetUsername() { return username; }
+        public void SetUsername(string username) { this.username = username; }
+        public void SetPin(int pin) {  this.pin = pin; }
+        public void SetBalance(double balance) {  this.balance = balance; }
+        public int GetWins() { return wins;}
+        public int GetLoss() { return loss;}
+        public void SetLoss(int loss)
         {
-            this.record.Add(new string(record));
+            this.loss = loss;   
         }
-        */
+        public void SetWins(int wins)
+        {
+            this.wins = wins;
+        }
     }
 }

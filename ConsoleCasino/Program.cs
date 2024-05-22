@@ -2,21 +2,30 @@
 using System.Net.NetworkInformation;
 using System.Security;
 using System.Security.Cryptography;
+using System.Linq;
+using System.Data;
 
 namespace ConsoleCasino
 {
     public class Program
     {
         public static Random rnd = new Random();
+
+        public static List<userAccount> accounts = new List<userAccount>();
         public static void Main(string[] args)
         {
             //User Accounts
-            List<userAccount> accounts = new List<userAccount>();
-            accounts.Add(new userAccount("Quang", 123, 0,0,0));
-            accounts.Add(new userAccount("Jason", 122, 0,0,0));
-            
+            accounts.Add(new userAccount("Quang", 123, 0,0,0)); //using for demo
+            accounts.Add(new userAccount("Jason", 122, 10,2,5));
+            accounts.Add(new userAccount("Bob", 111, 100, 6, 5));
+            accounts.Add(new userAccount("Lee", 124, 800, 10, 80));
+            accounts.Add(new userAccount("Hob", 190, 0, 10, 88));
+            accounts.Add(new userAccount("Jan", 666, 100, 20, 70));
+            accounts.Add(new userAccount("Quin", 444, 1, 100, 2));
+            accounts.Add(new userAccount("Jack", 999, 5, 80, 7));
+
             //Application start
-            Console.WriteLine("Welcome to Console Casino");
+            Console.WriteLine("Welcome to Console Casino\n");
 
             //login
             Console.WriteLine("Please enter your username: ");
@@ -71,7 +80,7 @@ namespace ConsoleCasino
                 int input;
                 while (true)
                 {
-                    if (int.TryParse(Console.ReadLine(), out input) == true && input > 0 && input < 7)
+                    if (int.TryParse(Console.ReadLine(), out input) == true && input > 0 && input < 8)
                     {
                         break;
                     }
@@ -99,15 +108,19 @@ namespace ConsoleCasino
                         Balance(currentUser);
                         break;
                     case 6:
+                        Leaderboard();
+                        Console.WriteLine();
+                        break;
+                    case 7:
                         Console.WriteLine("Thank You for visiting Concole Casino!");
-                        Console.WriteLine("We hope to see you again soon! :))");
+                        Console.WriteLine("We hope to see you again soon! :)) \n");
                         return;
                     default: //rendundant but incase as fallback option
-                        Console.WriteLine("Please enter a valid option");
+                        Console.WriteLine("\nPlease enter a valid option\n");
                         break;
                 } 
             }
-            
+           
         }
         public static void PrintOption()
         {
@@ -117,13 +130,28 @@ namespace ConsoleCasino
             Console.WriteLine("3. Start playing DICEGAME");
             Console.WriteLine("4. Start playing Roulette Game");
             Console.WriteLine("5. View balance.");
-            Console.WriteLine("6. Exit Casino");
+            Console.WriteLine("6. View winning leaderboard");
+            Console.WriteLine("7. Exit Casino\n");
+        }
+        public static void Leaderboard()
+        {
+            var userQuery =
+               from account in accounts
+               orderby account.GetWins() descending
+               select account;
+
+            int i = 0; //have visible number in leaderboard.
+            foreach (userAccount account in userQuery)
+            {
+                i++;
+                Console.WriteLine($"{i}.{account.username} with {account.GetWins()} WINS");
+            }
         }
         public static void ShowRecord(userAccount currentUser)
         {
             Console.WriteLine("ALL TIME RECORD:");
             Console.WriteLine("Wins: " + currentUser.GetWins());
-            Console.WriteLine("Loss: " + currentUser.GetLoss());
+            Console.WriteLine("Loss: " + currentUser.GetLoss() +"\n");
         }
         public static void Deposit(userAccount currentUser)
         {
@@ -135,7 +163,7 @@ namespace ConsoleCasino
                 Console.WriteLine("Enter the amount you would like to deposit: ");
             }
             currentUser.SetBalance(deposit);
-            Console.WriteLine("Thank you for your deposit!");
+            Console.WriteLine("Thank you for your deposit!\n");
         }
         public static void DiceGame(userAccount currentUser)
         {
@@ -149,9 +177,9 @@ namespace ConsoleCasino
                 {
                     return;
                 }
-                Console.WriteLine("Please Pick An Option:");
+                Console.WriteLine("\nPlease Pick An Option:");
                 Console.WriteLine("1. Start");
-                Console.WriteLine("2. Exit (Your bet will be refunded)");
+                Console.WriteLine("2. Exit (Your bet will be refunded)\n");
                 int input;
                 while (true)
                 {
@@ -176,21 +204,21 @@ namespace ConsoleCasino
                 Console.WriteLine("Dealer roll is: " + dealerRoll);
                 if (userRoll > dealerRoll)
                 {
-                    Console.WriteLine("HURRAY you WON!");
-                    Console.WriteLine($"You won {bet*2}!!");
+                    Console.WriteLine("\nHURRAY you WON!");
+                    Console.WriteLine($"You won {bet*2}!!\n");
                     currentUser.SetBalance(currentUser.GetBalance() + bet*2);
                     currentUser.SetWins(currentUser.GetWins() + 1);
                 }
                 else if (userRoll < dealerRoll)
                 {
-                    Console.WriteLine("Too bad you LOST!!!!!!");
-                    Console.WriteLine("The house will take all your bet :(");
+                    Console.WriteLine("\nToo bad you LOST!!!!!!");
+                    Console.WriteLine("The house will take all your bet :(\n");
                     currentUser.SetLoss(currentUser.GetLoss() + 1);
                 }
                 else
                 {
-                    Console.WriteLine("ON THE MONEY. YOU 5X you MONEY!");
-                    Console.WriteLine($"You won {bet * 5}!!");
+                    Console.WriteLine("\nON THE MONEY. YOU 5X you MONEY!");
+                    Console.WriteLine($"You won {bet * 5}!!\n");
                     currentUser.SetWins(currentUser.GetWins() + 1);
                     currentUser.SetBalance(currentUser.GetBalance() + bet*5);
                 }
@@ -200,7 +228,7 @@ namespace ConsoleCasino
         }
         public static void RouletteGame(userAccount currentUser)
          {
-            Console.WriteLine("WELCOME TO ROULETTE!");
+            Console.WriteLine("\nWELCOME TO ROULETTE!\n");
              while(true)
              {
                 Console.WriteLine("Please Enter Your BET! Enter 0 to exit.");
@@ -209,7 +237,7 @@ namespace ConsoleCasino
                 { 
                     return; 
                 }
-                Console.WriteLine("SELECT YOUR BETTING OPTION");
+                Console.WriteLine("\nSELECT YOUR BETTING OPTION");
                 Console.WriteLine("1. Single Number");
                 Console.WriteLine("2. Odd or Even");
                 Console.WriteLine("3. Exit (Your bet will be refunded)");
@@ -229,7 +257,7 @@ namespace ConsoleCasino
                 switch (input)
                 {
                     case 1: //pick number win by 30.
-                        Console.WriteLine("Please select an integer from 0 to 36:");
+                        Console.WriteLine("\nPlease select an integer from 0 to 36:");
                         int betNum;
                         while (true)
                         {
@@ -241,7 +269,7 @@ namespace ConsoleCasino
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Please try again and enter a valid integer from 0 to 36.");
+                                    Console.WriteLine("\nPlease try again and enter a valid integer from 0 to 36.");
                                 }
                             }//checking for valid entry
                             if (betNum >= 0 && betNum <= 36)
@@ -250,27 +278,27 @@ namespace ConsoleCasino
                             }
                             else
                             {
-                                Console.WriteLine("Please try again and enter a valid integer from 0 to 36.");
+                                Console.WriteLine("\nPlease try again and enter a valid integer from 0 to 36.");
                             }
                         }//checking for valid int between 0 - 36
-                        Console.WriteLine("THE WINNING NUMBER IS: " + rouletteRoll);
+                        Console.WriteLine("\nTHE WINNING NUMBER IS: " + rouletteRoll);
                         if (rouletteRoll == betNum)
                         {
-                            Console.WriteLine($"CONGRATS YOU WON {bet * 30}!!!");
+                            Console.WriteLine($"\nCONGRATS YOU WON {bet * 30}!!!\n");
                             currentUser.SetWins(currentUser.GetWins() + 1);
                             currentUser.SetBalance(currentUser.GetBalance() + bet * 30);
                             Balance(currentUser);
                         }
                         else
                         {
-                            Console.WriteLine($"Sadly you lost {bet} :(");
+                            Console.WriteLine($"\nSadly you lost {bet} :(\n");
                             currentUser.SetLoss(currentUser.GetLoss() + 1);
                             Balance(currentUser);
                         }
                         break;
 
                     case 2:
-                        Console.WriteLine("Please select 1 for odd or 0 for even: ");
+                        Console.WriteLine("\nPlease select 1 for odd or 0 for even: ");
                         int betInt;
                         while (true)
                         {
@@ -282,7 +310,7 @@ namespace ConsoleCasino
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Please try again and enter 1 for odd or 0 for even:");
+                                    Console.WriteLine("\nPlease try again and enter 1 for odd or 0 for even:");
                                 }
                             }//checking for valid entry
                             if (betInt == 1 || betInt == 0)
@@ -291,21 +319,21 @@ namespace ConsoleCasino
                             }
                             else
                             {
-                                Console.WriteLine("Please try again and enter  1 for odd or 0 for even:");
+                                Console.WriteLine("\nPlease try again and enter  1 for odd or 0 for even:");
                             }
                         }//checking for valid option
 
-                        Console.WriteLine("THE WINNING NUMBER IS: "+ rouletteRoll);
+                        Console.WriteLine("\nTHE WINNING NUMBER IS: "+ rouletteRoll);
                         if (rouletteRoll % 2 == betInt)
                         {
-                            Console.WriteLine($"CONGRATS YOU WON {bet * 2}!!!");
+                            Console.WriteLine($"\nCONGRATS YOU WON {bet * 2}!!!");
                             currentUser.SetBalance(currentUser.GetBalance() + bet * 2);
                             currentUser.SetWins(currentUser.GetWins() + 1);
                             Balance(currentUser);
                         }
                         else
                         {
-                            Console.WriteLine($"Sadly you lost {bet} :(");
+                            Console.WriteLine($"\nSadly you lost {bet} :(");
                             currentUser.SetLoss(currentUser.GetLoss() + 1);
                             Balance(currentUser);
                         }
@@ -352,7 +380,7 @@ namespace ConsoleCasino
         }
         public static void Balance(userAccount currentUser)
         {
-            Console.WriteLine("Current Balance: " + currentUser.GetBalance());
+            Console.WriteLine("Current Balance: " + currentUser.GetBalance() +"\n");
         }
 
     }

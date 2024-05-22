@@ -11,7 +11,7 @@ namespace ConsoleCasino
     {
         public string username;
         public int pin;
-        double balance;
+        public double balance;
         int wins;
         int loss;
         //List<string> record = new List<string>;

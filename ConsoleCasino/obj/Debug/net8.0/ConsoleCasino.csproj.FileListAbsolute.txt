@@ -3,3 +3,13 @@ C:\Users\intern.pmquang1\C#\ConsoleCasino\ConsoleCasino\obj\Debug\net8.0\Console
 C:\Users\intern.pmquang1\C#\ConsoleCasino\ConsoleCasino\obj\Debug\net8.0\ConsoleCasino.AssemblyInfo.cs
 C:\Users\intern.pmquang1\C#\ConsoleCasino\ConsoleCasino\obj\Debug\net8.0\ConsoleCasino.csproj.CoreCompileInputs.cache
 C:\Users\intern.pmquang1\C#\ConsoleCasino\ConsoleCasino\obj\Debug\net8.0\ConsoleCasino.sourcelink.json
+C:\Users\intern.pmquang1\C#\ConsoleCasino\ConsoleCasino\bin\Debug\net8.0\ConsoleCasino.exe
+C:\Users\intern.pmquang1\C#\ConsoleCasino\ConsoleCasino\bin\Debug\net8.0\ConsoleCasino.deps.json
+C:\Users\intern.pmquang1\C#\ConsoleCasino\ConsoleCasino\bin\Debug\net8.0\ConsoleCasino.runtimeconfig.json
+C:\Users\intern.pmquang1\C#\ConsoleCasino\ConsoleCasino\bin\Debug\net8.0\ConsoleCasino.dll
+C:\Users\intern.pmquang1\C#\ConsoleCasino\ConsoleCasino\bin\Debug\net8.0\ConsoleCasino.pdb
+C:\Users\intern.pmquang1\C#\ConsoleCasino\ConsoleCasino\obj\Debug\net8.0\ConsoleCasino.dll
+C:\Users\intern.pmquang1\C#\ConsoleCasino\ConsoleCasino\obj\Debug\net8.0\refint\ConsoleCasino.dll
+C:\Users\intern.pmquang1\C#\ConsoleCasino\ConsoleCasino\obj\Debug\net8.0\ConsoleCasino.pdb
+C:\Users\intern.pmquang1\C#\ConsoleCasino\ConsoleCasino\obj\Debug\net8.0\ConsoleCasino.genruntimeconfig.cache
+C:\Users\intern.pmquang1\C#\ConsoleCasino\ConsoleCasino\obj\Debug\net8.0\ref\ConsoleCasino.dll

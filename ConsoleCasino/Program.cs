@@ -115,7 +115,7 @@ namespace ConsoleCasino
                         Console.WriteLine("Thank You for visiting Concole Casino!");
                         Console.WriteLine("We hope to see you again soon! :)) \n");
                         return;
-                    default: //rendundant but incase as fallback option
+                    default: //rendundant as fallback option
                         Console.WriteLine("\nPlease enter a valid option\n");
                         break;
                 } 
@@ -124,7 +124,7 @@ namespace ConsoleCasino
         }
         public static void PrintOption()
         {
-            Console.WriteLine("Please select the following options");
+            Console.WriteLine("\nPlease select the following options");
             Console.WriteLine("1. Add deposit to balance");
             Console.WriteLine("2. View user gambling records");
             Console.WriteLine("3. Start playing DICEGAME");
@@ -140,6 +140,8 @@ namespace ConsoleCasino
                orderby account.GetWins() descending
                select account;
 
+            Console.WriteLine();//spacing for aesthetic
+
             int i = 0; //have visible number in leaderboard.
             foreach (userAccount account in userQuery)
             {
@@ -149,7 +151,7 @@ namespace ConsoleCasino
         }
         public static void ShowRecord(userAccount currentUser)
         {
-            Console.WriteLine("ALL TIME RECORD:");
+            Console.WriteLine("\nALL TIME RECORD:");
             Console.WriteLine("Wins: " + currentUser.GetWins());
             Console.WriteLine("Loss: " + currentUser.GetLoss() +"\n");
         }
@@ -367,7 +369,7 @@ namespace ConsoleCasino
                 if (currentUser.GetBalance() - withdraw >= 0)
                 {
                     currentUser.SetBalance(currentUser.GetBalance() - withdraw);
-                    Console.WriteLine("You are good to go!");
+                    Console.WriteLine("You are good to go!\n");
                     return withdraw;
                 }
                 else

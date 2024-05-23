@@ -15,14 +15,14 @@ namespace ConsoleCasino
         public static void Main(string[] args)
         {
             //User Accounts
-            accounts.Add(new userAccount("Quang", 123, 0,0,0)); //using for demo
-            accounts.Add(new userAccount("Jason", 122, 10,2,5));
-            accounts.Add(new userAccount("Bob", 111, 100, 6, 5));
-            accounts.Add(new userAccount("Lee", 124, 800, 10, 80));
-            accounts.Add(new userAccount("Hob", 190, 0, 10, 88));
-            accounts.Add(new userAccount("Jan", 666, 100, 20, 70));
-            accounts.Add(new userAccount("Quin", 444, 1, 100, 2));
-            accounts.Add(new userAccount("Jack", 999, 5, 80, 7));
+            accounts.Add(new userAccount("Quang", 123, 0, new List<History>())); //using for demo
+            accounts.Add(new userAccount("Jason", 122, 10, new List<History>()));
+            accounts.Add(new userAccount("Bob", 111, 100, new List<History>()));
+            accounts.Add(new userAccount("Lee", 124, 800, new List<History>()));
+            accounts.Add(new userAccount("Hob", 190, 0, new List<History>()));
+            accounts.Add(new userAccount("Jan", 666, 100, new List<History>()));
+            accounts.Add(new userAccount("Quin", 444, 1, new List<History>()));
+            accounts.Add(new userAccount("Jack", 999, 5, new List<History>()));
 
             //Application start
             Console.WriteLine("Welcome to Console Casino\n");
@@ -58,7 +58,7 @@ namespace ConsoleCasino
                 try
                 {
                     int.TryParse(Console.ReadLine(), out pin);
-                    if (currentUser.GetPin() == pin)
+                    if (currentUser.pin == pin)
                     {
                         break;
                     }
@@ -96,7 +96,14 @@ namespace ConsoleCasino
                         Deposit(currentUser);
                         break;
                     case 2:
-                        ShowRecord(currentUser);
+                        if (currentUser.histories.Count() > 0)
+                        {
+                            ShowRecord(currentUser);
+                        }
+                        else
+                        {
+                            Console.WriteLine("You have an empty record. Please select another option.\n");
+                        }
                         break;
                     case 3:
                         DiceGame(currentUser);
@@ -108,10 +115,6 @@ namespace ConsoleCasino
                         Balance(currentUser);
                         break;
                     case 6:
-                        Leaderboard();
-                        Console.WriteLine();
-                        break;
-                    case 7:
                         Console.WriteLine("Thank You for visiting Concole Casino!");
                         Console.WriteLine("We hope to see you again soon! :)) \n");
                         return;
@@ -122,38 +125,140 @@ namespace ConsoleCasino
             }
            
         }
+        public static void AddUserRecord(userAccount currentUser, double money, string game, string result)
+        {
+                currentUser.histories.Add(new History(money, game, result));
+        }
         public static void PrintOption()
         {
             Console.WriteLine("\nPlease select the following options");
             Console.WriteLine("1. Add deposit to balance");
-            Console.WriteLine("2. View user gambling records");
+            Console.WriteLine("2. View user gambling records");//need second menu for user to select what they want to see
             Console.WriteLine("3. Start playing DICEGAME");
             Console.WriteLine("4. Start playing Roulette Game");
-            Console.WriteLine("5. View balance.");
-            Console.WriteLine("6. View winning leaderboard");
-            Console.WriteLine("7. Exit Casino\n");
+            Console.WriteLine("5. View balance");
+            Console.WriteLine("6. Exit Casino\n");
         }
-        public static void Leaderboard()
+        
+        public static void ShowRecord(userAccount currentUser) 
         {
-            var userQuery =
-               from account in accounts
-               orderby account.GetWins() descending
-               select account;
+            Console.WriteLine("Welcome to your gambling history!");
+            while (true)
+            {
+                Console.WriteLine("\nPlease select the following option:");
+                Console.WriteLine("1. Win record");
+                Console.WriteLine("2. Loss record");
+                Console.WriteLine("3. All records");
+                Console.WriteLine("4. Stat summary");
+                Console.WriteLine("5. Exit");
 
-            Console.WriteLine();//spacing for aesthetic
-
-            int i = 0; //have visible number in leaderboard.
-            foreach (userAccount account in userQuery)
+                int input;
+                while (true)
+                {
+                    if (int.TryParse(Console.ReadLine(), out input) == true && input > 0 && input < 6)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please enter a valid option\n");
+                    }
+                }
+                switch (input)
+                {
+                    case 1:
+                        GetWinRecord(currentUser); break;
+                    case 2:
+                        GetLossRecord(currentUser); break;
+                    case 3:
+                        GetAllRecord(currentUser); break;
+                    case 4:
+                        StatSummary(currentUser); break;
+                    case 5:
+                        return;
+                    default:
+                        Console.WriteLine("Please enter a valid option\n");
+                        break;
+                }
+            }
+            
+        }
+        
+        public static void GetAllRecord(userAccount currentUser)
+        {
+            var recordQuery =
+                from History in currentUser.histories
+                select History;
+           
+            Console.WriteLine("\nALL TIME RECORD: \n");
+            Console.WriteLine("   Game \tAmount \tResult");
+            double totalMoney = 0;
+            int i = 0;
+            foreach (History history in recordQuery)
             {
                 i++;
-                Console.WriteLine($"{i}.{account.username} with {account.GetWins()} WINS");
+                totalMoney += history.money;
+                Console.WriteLine($"{i}. {history.game}\t{history.money}\t{history.result}");
             }
+            
+            Console.WriteLine("\nTotal Money Won: " + totalMoney);
+            Console.WriteLine("Total games played: " + recordQuery.Count());
+            
         }
-        public static void ShowRecord(userAccount currentUser)
+        public static void StatSummary(userAccount currentUser)
         {
-            Console.WriteLine("\nALL TIME RECORD:");
-            Console.WriteLine("Wins: " + currentUser.GetWins());
-            Console.WriteLine("Loss: " + currentUser.GetLoss() +"\n");
+            Console.WriteLine($"{currentUser.username}'s All Time Gambling Stats!\n");
+            var recordQuery =
+                from History in currentUser.histories
+                select History;
+            int totalGamesPlayed = recordQuery.Count();
+            double biggestWin = recordQuery.Max(history => history.money);
+            double biggestLoss = recordQuery.Min(history => history.money);
+            int DGWins = recordQuery.Count(history => history.game.Equals("Dice Game") && history.result.Equals("Win"));
+            var rouletteWins = recordQuery.Count(history => history.game.Equals("Roulette") && history.result.Equals("Win"));
+
+            Console.WriteLine($"You played a total of {totalGamesPlayed} games!");
+            Console.WriteLine($"Out of {totalGamesPlayed} you won {DGWins + rouletteWins} games!");
+            Console.WriteLine($"In roulette you won {rouletteWins} games.");
+            Console.WriteLine($"In Dice Game you won {DGWins} games.");
+            Console.WriteLine($"Your biggest win is ${biggestWin} while your biggest loss is ${biggestLoss}.");
+        }
+        public static void GetWinRecord(userAccount currentUser)
+        {
+            var winQuery = 
+                from History in currentUser.histories
+                where History.result == "Win"
+                select History;
+            int i=0; //counter for number of wins(first log to last)
+            double totalMoney = 0;
+            Console.WriteLine("Win RECORD: \n");
+            Console.WriteLine("   Game \tAmount");
+            foreach (History history in winQuery)
+            {
+                i++;
+                totalMoney += history.money;
+                Console.WriteLine($"{i}. {history.game}\t{history.money}");
+            }
+            Console.WriteLine("\nTotal Money Won: " + totalMoney);
+        }
+        public static void GetLossRecord(userAccount currentUser)
+        {
+            var lossQuery =
+                from History in currentUser.histories
+                where History.result == "Loss"
+                select History;
+            int i = 0; //counter for number of wins(first log to last)
+            double totalMoney = 0;
+            Console.WriteLine("Loss RECORD: \n");
+            Console.WriteLine("   Game \tAmount");
+            foreach (History history in lossQuery)
+            {
+                i++;
+                totalMoney += history.money;
+                Console.WriteLine($"{i}. {history.game}\t{history.money}");
+            }
+            
+            Console.WriteLine("\nTotal Money Lost: " + totalMoney);
         }
         public static void Deposit(userAccount currentUser)
         {
@@ -164,7 +269,7 @@ namespace ConsoleCasino
                 Console.WriteLine("Invalid input!");
                 Console.WriteLine("Enter the amount you would like to deposit: ");
             }
-            currentUser.SetBalance(deposit);
+            currentUser.balance = deposit;
             Console.WriteLine("Thank you for your deposit!\n");
         }
         public static void DiceGame(userAccount currentUser)
@@ -191,7 +296,7 @@ namespace ConsoleCasino
                     }
                     else if(input == 2)
                     {
-                        currentUser.SetBalance(currentUser.GetBalance() + bet); //returning bet money if they want to exit after placing bet.
+                        currentUser.balance += bet; //returning bet money if they want to exit after placing bet.
                         Balance(currentUser);
                         return;
                     }
@@ -208,21 +313,22 @@ namespace ConsoleCasino
                 {
                     Console.WriteLine("\nHURRAY you WON!");
                     Console.WriteLine($"You won {bet*2}!!\n");
-                    currentUser.SetBalance(currentUser.GetBalance() + bet*2);
-                    currentUser.SetWins(currentUser.GetWins() + 1);
+                    currentUser.balance += (bet*2);
+                    AddUserRecord(currentUser, bet * 2, "Dice Game", "Win");
                 }
                 else if (userRoll < dealerRoll)
                 {
                     Console.WriteLine("\nToo bad you LOST!!!!!!");
                     Console.WriteLine("The house will take all your bet :(\n");
-                    currentUser.SetLoss(currentUser.GetLoss() + 1);
+                    AddUserRecord(currentUser, -bet, "Dice Game", "Loss");
                 }
                 else
                 {
                     Console.WriteLine("\nON THE MONEY. YOU 5X you MONEY!");
                     Console.WriteLine($"You won {bet * 5}!!\n");
-                    currentUser.SetWins(currentUser.GetWins() + 1);
-                    currentUser.SetBalance(currentUser.GetBalance() + bet*5);
+                    //add to record for win
+                    currentUser.balance+=(bet*5);
+                    AddUserRecord(currentUser, bet * 5, "Dice Game", "Win");
                 }
                 Balance(currentUser);
             }
@@ -287,15 +393,18 @@ namespace ConsoleCasino
                         if (rouletteRoll == betNum)
                         {
                             Console.WriteLine($"\nCONGRATS YOU WON {bet * 30}!!!\n");
-                            currentUser.SetWins(currentUser.GetWins() + 1);
-                            currentUser.SetBalance(currentUser.GetBalance() + bet * 30);
+                            //add win to record
+                            currentUser.balance += (bet * 30);
                             Balance(currentUser);
+                            AddUserRecord(currentUser, bet * 30, "Roulette", "Win");
+
                         }
                         else
                         {
                             Console.WriteLine($"\nSadly you lost {bet} :(\n");
-                            currentUser.SetLoss(currentUser.GetLoss() + 1);
+                            //add loss to record
                             Balance(currentUser);
+                            AddUserRecord(currentUser, -bet, "Roulette", "Loss");
                         }
                         break;
 
@@ -329,20 +438,20 @@ namespace ConsoleCasino
                         if (rouletteRoll % 2 == betInt)
                         {
                             Console.WriteLine($"\nCONGRATS YOU WON {bet * 2}!!!");
-                            currentUser.SetBalance(currentUser.GetBalance() + bet * 2);
-                            currentUser.SetWins(currentUser.GetWins() + 1);
+                            currentUser.balance += (bet * 2);
+                            AddUserRecord(currentUser, bet * 2, "Roulette", "Win");
                             Balance(currentUser);
                         }
                         else
                         {
                             Console.WriteLine($"\nSadly you lost {bet} :(");
-                            currentUser.SetLoss(currentUser.GetLoss() + 1);
+                            AddUserRecord(currentUser, -bet, "Roulette", "Loss");
                             Balance(currentUser);
                         }
                         break;
 
                     case 3:
-                        currentUser.SetBalance(currentUser.GetBalance()+bet); //returning bet money if they want to exit after placing bet.
+                        currentUser.balance += bet; //returning bet money if they want to exit after placing bet.
                         Balance(currentUser);
                         return;
 
@@ -366,9 +475,9 @@ namespace ConsoleCasino
                     }
                     Console.WriteLine("Please enter a valid value!");
                 }
-                if (currentUser.GetBalance() - withdraw >= 0)
+                if (currentUser.balance - withdraw >= 0)
                 {
-                    currentUser.SetBalance(currentUser.GetBalance() - withdraw);
+                    currentUser.balance -= withdraw;
                     Console.WriteLine("You are good to go!\n");
                     return withdraw;
                 }
@@ -382,7 +491,7 @@ namespace ConsoleCasino
         }
         public static void Balance(userAccount currentUser)
         {
-            Console.WriteLine("Current Balance: " + currentUser.GetBalance() +"\n");
+            Console.WriteLine("Current Balance: " + currentUser.balance +"\n");
         }
 
     }

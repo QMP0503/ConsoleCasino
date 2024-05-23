@@ -7,12 +7,12 @@
       "RelativeMoniker": "D:0:0:{D2F3276F-0930-419E-A6F3-8EDD62D63C41}|ConsoleCasino\\ConsoleCasino.csproj|solutionrelative:consolecasino\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D2F3276F-0930-419E-A6F3-8EDD62D63C41}|ConsoleCasino\\ConsoleCasino.csproj|c:\\users\\intern.pmquang1\\c#\\consolecasino\\consolecasino\\useraccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D2F3276F-0930-419E-A6F3-8EDD62D63C41}|ConsoleCasino\\ConsoleCasino.csproj|solutionrelative:consolecasino\\useraccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D2F3276F-0930-419E-A6F3-8EDD62D63C41}|ConsoleCasino\\ConsoleCasino.csproj|c:\\users\\intern.pmquang1\\c#\\consolecasino\\consolecasino\\history.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D2F3276F-0930-419E-A6F3-8EDD62D63C41}|ConsoleCasino\\ConsoleCasino.csproj|solutionrelative:consolecasino\\history.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D2F3276F-0930-419E-A6F3-8EDD62D63C41}|ConsoleCasino\\ConsoleCasino.csproj|c:\\users\\intern.pmquang1\\c#\\consolecasino\\consolecasino\\useraccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D2F3276F-0930-419E-A6F3-8EDD62D63C41}|ConsoleCasino\\ConsoleCasino.csproj|solutionrelative:consolecasino\\useraccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -32,7 +32,7 @@
               "RelativeDocumentMoniker": "ConsoleCasino\\Program.cs",
               "ToolTip": "C:\\Users\\intern.pmquang1\\C#\\ConsoleCasino\\ConsoleCasino\\Program.cs",
               "RelativeToolTip": "ConsoleCasino\\Program.cs",
-              "ViewState": "AQIAAM0AAAAAAAAAAAAAwNgAAAA7AAAA",
+              "ViewState": "AQIAAKAAAAAAAAAAAAAcwLQAAABHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-21T09:42:40.91Z",
               "IsPinned": true,
@@ -40,26 +40,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "userAccount.cs",
               "DocumentMoniker": "C:\\Users\\intern.pmquang1\\C#\\ConsoleCasino\\ConsoleCasino\\userAccount.cs",
               "RelativeDocumentMoniker": "ConsoleCasino\\userAccount.cs",
               "ToolTip": "C:\\Users\\intern.pmquang1\\C#\\ConsoleCasino\\ConsoleCasino\\userAccount.cs",
               "RelativeToolTip": "ConsoleCasino\\userAccount.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAABgAAAAAAAAA",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAQwBkAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-21T10:00:11.915Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "History.cs",
               "DocumentMoniker": "C:\\Users\\intern.pmquang1\\C#\\ConsoleCasino\\ConsoleCasino\\History.cs",
               "RelativeDocumentMoniker": "ConsoleCasino\\History.cs",
               "ToolTip": "C:\\Users\\intern.pmquang1\\C#\\ConsoleCasino\\ConsoleCasino\\History.cs",
               "RelativeToolTip": "ConsoleCasino\\History.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAxwBIAAAAhAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-23T01:44:37.346Z",
               "EditorCaption": ""

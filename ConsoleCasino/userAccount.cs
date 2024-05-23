@@ -13,17 +13,21 @@ namespace ConsoleCasino
         public double balance {  get; set; }
         public int pin { get; set; }
 
-        public List<History> histories { get; set; }
+        public List<History> histories = new List<History>();
 
-        public userAccount(string username, int pin, double balance, List<History> histories) //need to add history class to manage amount of money won.
+        public userAccount(string username, int pin, double balance) 
         {
             this.username = username;
             this.pin = pin;
             this.balance = balance;
-            this.histories = histories;
+            
+        }
+        public static void AddUserRecord(userAccount currentUser, double money, string game, string result)
+        {
+            currentUser.histories.Add(new History(money, game, result));
         }
 
-        
-        
+
+
     }
 }
